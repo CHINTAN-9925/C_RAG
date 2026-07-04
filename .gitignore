@@ -1,0 +1,33 @@
+# Secrets / environment
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# Local caches / models
+.cache/
+*.faiss
+*.pkl
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Claude Code / assistant tooling
+.claude/
+.claude*/
+CLAUDE.md
+CLAUDE.local.md
+.cursor/
+.aider*
+scratchpad/

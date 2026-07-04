@@ -1,0 +1,19 @@
+streamlit
+python-dotenv
+pydantic
+pypdf
+faiss-cpu
+langchain
+langchain-core
+langchain-community
+langchain-text-splitters
+langgraph
+langchain-tavily
+
+# Free stack (active)
+langchain-groq
+langchain-huggingface
+sentence-transformers
+
+# Paid stack (OpenAI) - only needed if you switch back in crag_engine.py
+# langchain-openai
