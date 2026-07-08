@@ -32,6 +32,27 @@ self-correction loop around retrieval:
 The result is an answer that is grounded in vetted context, and that can fall back
 to fresh web information when your PDFs don't cover the question.
 
+### Architecture
+
+![Corrective RAG architecture](assets/crag_architecture.png)
+
+The diagram maps directly onto this app's pipeline:
+
+- **Retrieval** - the question `x` retrieves candidate documents (`d1`, `d2`) - our
+  `retrieve` node pulling the top-k chunks from FAISS.
+- **Knowledge Correction** - a **Retrieval Evaluator** grades the documents and
+  routes on the verdict:
+  - **Correct** -> **Knowledge Refinement**: decompose the docs into strips
+    (sentences), filter out the irrelevant ones, and recompose the internal
+    knowledge `k_in`.
+  - **Incorrect** -> **Knowledge Searching**: rewrite `x` into a web query, run a
+    web search, and select external knowledge `k_ex`.
+  - **Ambiguous** -> do **both** and combine `k_in` + `k_ex`.
+- **Generation** - the generator writes the answer from `x` plus the knowledge it
+  was given: `k_in` (Correct), `k_in + k_ex` (Ambiguous), or `k_ex` (Incorrect).
+
+> Figure from the CRAG paper ([Yan et al., 2024](https://arxiv.org/abs/2401.15884)).
+
 ---
 
 ## Demo
